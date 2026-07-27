@@ -62,6 +62,15 @@ public class LoginForm extends JFrame {
                     dispose(); // Login window close
 
                     new Dashboard(user);
+                    if (user.getRole().equalsIgnoreCase("Admin")) {
+
+                        new AdminDashboard(user);
+
+                    } else {
+
+                        new Dashboard(user);
+
+                    }
 
                 } else {
                     JOptionPane.showMessageDialog(null,

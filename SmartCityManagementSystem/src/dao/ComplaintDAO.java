@@ -39,38 +39,97 @@ public class ComplaintDAO {
         }
          public List<Complaint> getComplaintsByUser(String email) {
 
-            List<Complaint> list = new ArrayList<>();
+             List<Complaint> list = new ArrayList<>();
 
-            String query = "SELECT * FROM complaints WHERE user_email=?";
+             String query = "SELECT * FROM complaints WHERE user_email=?";
 
-            try {
+             try {
 
-                Connection con = DBConnection.getConnection();
+                 Connection con = DBConnection.getConnection();
 
-                PreparedStatement ps = con.prepareStatement(query);
+                 PreparedStatement ps = con.prepareStatement(query);
 
-                ps.setString(1, email);
+                 ps.setString(1, email);
 
-                ResultSet rs = ps.executeQuery();
+                 ResultSet rs = ps.executeQuery();
 
-                while (rs.next()) {
+                 while (rs.next()) {
 
-                    Complaint complaint = new Complaint();
+                     Complaint complaint = new Complaint();
 
-                    complaint.setId(rs.getInt("id"));
-                    complaint.setUserEmail(rs.getString("user_email"));
-                    complaint.setCategory(rs.getString("category"));
-                    complaint.setTitle(rs.getString("title"));
-                    complaint.setDescription(rs.getString("description"));
-                    complaint.setLocation(rs.getString("location"));
-                    complaint.setStatus(rs.getString("status"));
+                     complaint.setId(rs.getInt("id"));
+                     complaint.setUserEmail(rs.getString("user_email"));
+                     complaint.setCategory(rs.getString("category"));
+                     complaint.setTitle(rs.getString("title"));
+                     complaint.setDescription(rs.getString("description"));
+                     complaint.setLocation(rs.getString("location"));
+                     complaint.setStatus(rs.getString("status"));
 
-                    list.add(complaint);
-                }
+                     list.add(complaint);
+                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return list;
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+             return list;
+         }
+            public List<Complaint> getAllComplaints() {
+
+                 List<Complaint> list = new ArrayList<>();
+
+                 String query = "SELECT * FROM complaints";
+
+                 try {
+
+                     Connection con = DBConnection.getConnection();
+
+                     PreparedStatement ps = con.prepareStatement(query);
+
+                     ResultSet rs = ps.executeQuery();
+
+                     while (rs.next()) {
+
+                         Complaint complaint = new Complaint();
+
+                         complaint.setId(rs.getInt("id"));
+                         complaint.setUserEmail(rs.getString("user_email"));
+                         complaint.setCategory(rs.getString("category"));
+                         complaint.setTitle(rs.getString("title"));
+                         complaint.setDescription(rs.getString("description"));
+                         complaint.setLocation(rs.getString("location"));
+                         complaint.setStatus(rs.getString("status"));
+
+                         list.add(complaint);
+                     }
+
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+
+                 return list;
+             }
+    public boolean updateComplaintStatus(int id, String status) {
+
+        String query = "UPDATE complaints SET status=? WHERE id=?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, status);
+            ps.setInt(2, id);
+
+            int rows = ps.executeUpdate();
+
+            return rows > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+        }
     }
-}
+    }
+
