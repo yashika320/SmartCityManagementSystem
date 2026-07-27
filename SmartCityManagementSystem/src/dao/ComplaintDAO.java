@@ -36,6 +36,7 @@ public class ComplaintDAO {
             e.printStackTrace();
             return false;
         }
+        }
          public List<Complaint> getComplaintsByUser(String email) {
 
             List<Complaint> list = new ArrayList<>();

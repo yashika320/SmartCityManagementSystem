@@ -25,11 +25,20 @@ public class Dashboard extends JFrame {
         JButton complaintButton = new JButton("Register Complaint");
         complaintButton.setBounds(180, 140, 180, 35);
         add(complaintButton);
+        JButton viewButton = new JButton("View My Complaints");
+        viewButton.setBounds(180, 190, 180, 35);
+        add(viewButton);
 
         complaintButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ComplaintForm(user);
+            }
+        });
+        viewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewComplaintsForm(user);
             }
         });
         setVisible(true);
