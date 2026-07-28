@@ -41,12 +41,19 @@ public class AdminDashboard extends JFrame {
         logout.setBounds(130,200,220,35);
         add(logout);
 
+
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new LoginForm();
             }
+        });
+        JButton searchButton = new JButton("Search Complaint");
+        searchButton.setBounds(130, 250, 220, 35);
+        add(searchButton);
+        searchButton.addActionListener(e -> {
+            new SearchComplaintForm();
         });
 
         setVisible(true);

@@ -36,78 +36,80 @@ public class ComplaintDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Complaint> getComplaintsByUser(String email) {
+
+        List<Complaint> list = new ArrayList<>();
+
+        String query = "SELECT * FROM complaints WHERE user_email=?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Complaint complaint = new Complaint();
+
+                complaint.setId(rs.getInt("id"));
+                complaint.setUserEmail(rs.getString("user_email"));
+                complaint.setCategory(rs.getString("category"));
+                complaint.setTitle(rs.getString("title"));
+                complaint.setDescription(rs.getString("description"));
+                complaint.setLocation(rs.getString("location"));
+                complaint.setStatus(rs.getString("status"));
+
+                list.add(complaint);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-         public List<Complaint> getComplaintsByUser(String email) {
+        return list;
+    }
 
-             List<Complaint> list = new ArrayList<>();
+    public List<Complaint> getAllComplaints() {
 
-             String query = "SELECT * FROM complaints WHERE user_email=?";
+        List<Complaint> list = new ArrayList<>();
 
-             try {
+        String query = "SELECT * FROM complaints";
 
-                 Connection con = DBConnection.getConnection();
+        try {
 
-                 PreparedStatement ps = con.prepareStatement(query);
+            Connection con = DBConnection.getConnection();
 
-                 ps.setString(1, email);
+            PreparedStatement ps = con.prepareStatement(query);
 
-                 ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-                 while (rs.next()) {
+            while (rs.next()) {
 
-                     Complaint complaint = new Complaint();
+                Complaint complaint = new Complaint();
 
-                     complaint.setId(rs.getInt("id"));
-                     complaint.setUserEmail(rs.getString("user_email"));
-                     complaint.setCategory(rs.getString("category"));
-                     complaint.setTitle(rs.getString("title"));
-                     complaint.setDescription(rs.getString("description"));
-                     complaint.setLocation(rs.getString("location"));
-                     complaint.setStatus(rs.getString("status"));
+                complaint.setId(rs.getInt("id"));
+                complaint.setUserEmail(rs.getString("user_email"));
+                complaint.setCategory(rs.getString("category"));
+                complaint.setTitle(rs.getString("title"));
+                complaint.setDescription(rs.getString("description"));
+                complaint.setLocation(rs.getString("location"));
+                complaint.setStatus(rs.getString("status"));
 
-                     list.add(complaint);
-                 }
+                list.add(complaint);
+            }
 
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
-             return list;
-         }
-            public List<Complaint> getAllComplaints() {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
-                 List<Complaint> list = new ArrayList<>();
-
-                 String query = "SELECT * FROM complaints";
-
-                 try {
-
-                     Connection con = DBConnection.getConnection();
-
-                     PreparedStatement ps = con.prepareStatement(query);
-
-                     ResultSet rs = ps.executeQuery();
-
-                     while (rs.next()) {
-
-                         Complaint complaint = new Complaint();
-
-                         complaint.setId(rs.getInt("id"));
-                         complaint.setUserEmail(rs.getString("user_email"));
-                         complaint.setCategory(rs.getString("category"));
-                         complaint.setTitle(rs.getString("title"));
-                         complaint.setDescription(rs.getString("description"));
-                         complaint.setLocation(rs.getString("location"));
-                         complaint.setStatus(rs.getString("status"));
-
-                         list.add(complaint);
-                     }
-
-                 } catch (Exception e) {
-                     e.printStackTrace();
-                 }
-
-                 return list;
-             }
     public boolean updateComplaintStatus(int id, String status) {
 
         String query = "UPDATE complaints SET status=? WHERE id=?";
@@ -131,5 +133,39 @@ public class ComplaintDAO {
             return false;
         }
     }
+        public Complaint searchComplaintById ( int id){
+
+            String query = "SELECT * FROM complaints WHERE id=?";
+
+            try {
+
+                Connection con = DBConnection.getConnection();
+
+                PreparedStatement ps = con.prepareStatement(query);
+
+                ps.setInt(1, id);
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+
+                    Complaint complaint = new Complaint();
+
+                    complaint.setId(rs.getInt("id"));
+                    complaint.setUserEmail(rs.getString("user_email"));
+                    complaint.setCategory(rs.getString("category"));
+                    complaint.setTitle(rs.getString("title"));
+                    complaint.setDescription(rs.getString("description"));
+                    complaint.setLocation(rs.getString("location"));
+                    complaint.setStatus(rs.getString("status"));
+                    return complaint;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
+
+
 
