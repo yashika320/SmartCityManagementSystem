@@ -73,6 +73,7 @@ public class RegistrationForm extends JFrame {
         registerButton.setBounds(90, 300, 120, 35);
         add(registerButton);
         registerButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -102,6 +103,18 @@ public class RegistrationForm extends JFrame {
         loginButton = new JButton("Login");
         loginButton.setBounds(240, 300, 120, 35);
         add(loginButton);
+
+        if (nameField.getText().trim().isEmpty() ||
+                emailField.getText().trim().isEmpty() ||
+                String.valueOf(passwordField.getPassword()).trim().isEmpty() ||
+                phoneField.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Please fill all fields!"
+            );
+            return;
+        }
 
         setVisible(true);
     }

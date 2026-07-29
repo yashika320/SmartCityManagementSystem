@@ -48,6 +48,15 @@ public class LoginForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if (emailField.getText().trim().isEmpty() ||
+                        String.valueOf(passwordField.getPassword()).trim().isEmpty()) {
+
+                    JOptionPane.showMessageDialog(
+                            LoginForm.this,
+                            "Please fill all fields!"
+                    );
+                    return;
+                }
                 String email = emailField.getText();
                 String password = String.valueOf(passwordField.getPassword());
 
@@ -61,7 +70,7 @@ public class LoginForm extends JFrame {
 
                     dispose(); // Login window close
 
-                    new Dashboard(user);
+
                     if (user.getRole().equalsIgnoreCase("Admin")) {
 
                         new AdminDashboard(user);

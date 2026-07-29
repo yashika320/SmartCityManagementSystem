@@ -41,6 +41,25 @@ public class Dashboard extends JFrame {
                 new ViewComplaintsForm(user);
             }
         });
+
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setBounds(180, 260, 180, 35);
+        add(logoutButton);
+
+        logoutButton.addActionListener(e -> {
+
+            int choice = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to logout?",
+                    "Logout Confirmation",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (choice == JOptionPane.YES_OPTION) {
+                dispose();
+                new LoginForm();
+            }
+        });
         setVisible(true);
     }
 }
