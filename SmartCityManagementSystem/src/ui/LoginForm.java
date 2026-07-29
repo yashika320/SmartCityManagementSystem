@@ -1,6 +1,7 @@
 package ui;
 import dao.UserDAO;
 import model.User;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -20,13 +21,16 @@ public class LoginForm extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
 
         titleLabel = new JLabel("USER LOGIN");
-        titleLabel.setBounds(160, 20, 150, 30);
+        titleLabel.setBounds(140, 20, 200, 35);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         add(titleLabel);
 
         emailLabel = new JLabel("Email:");
         emailLabel.setBounds(50, 80, 100, 25);
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         add(emailLabel);
 
         emailField = new JTextField();
@@ -35,6 +39,7 @@ public class LoginForm extends JFrame {
 
         passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(50, 130, 100, 25);
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         add(passwordLabel);
 
         passwordField = new JPasswordField();
@@ -42,8 +47,13 @@ public class LoginForm extends JFrame {
         add(passwordField);
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(80, 220, 120, 35);
+        loginButton.setBounds(80, 220, 120, 40);
+        loginButton.setFont(new Font("Arial", Font.BOLD, 14));
+        loginButton.setBackground(new Color(46,204,113));
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setFocusPainted(false);
         add(loginButton);
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,8 +99,17 @@ public class LoginForm extends JFrame {
         });
 
         registerButton = new JButton("Register");
-        registerButton.setBounds(220, 220, 120, 35);
+        registerButton.setBounds(220, 220, 120, 40);
+        registerButton.setFont(new Font("Arial", Font.BOLD, 14));
+        registerButton.setBackground(new Color(52,152,219));
+        registerButton.setForeground(Color.WHITE);
+        registerButton.setFocusPainted(false);
         add(registerButton);
+
+        registerButton.addActionListener(e -> {
+            dispose();
+            new RegistrationForm();
+        });
 
         setVisible(true);
     }

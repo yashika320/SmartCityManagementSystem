@@ -28,3 +28,16 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+# Compiled files
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+
+# Build folders
+out/
+target/
+
+# Logs
+*.log

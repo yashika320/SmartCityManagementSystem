@@ -2,7 +2,7 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.User;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class Dashboard extends JFrame {
@@ -14,20 +14,34 @@ public class Dashboard extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
 
         JLabel welcomeLabel = new JLabel("Welcome, " + user.getFullName());
-        welcomeLabel.setBounds(180, 40, 250, 30);
+        welcomeLabel.setBounds(150, 20, 320, 35);
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 22));
         add(welcomeLabel);
 
         JLabel roleLabel = new JLabel("Role : " + user.getRole());
-        roleLabel.setBounds(180, 80, 200, 30);
+        roleLabel.setBounds(220, 60, 180, 30);
+        roleLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         add(roleLabel);
+
         JButton complaintButton = new JButton("Register Complaint");
-        complaintButton.setBounds(180, 140, 180, 35);
+        complaintButton.setBounds(180, 120, 220, 40);
+        complaintButton.setFont(new Font("Arial", Font.BOLD, 14));
+        complaintButton.setBackground(new Color(46,204,113));
+        complaintButton.setForeground(Color.WHITE);
+        complaintButton.setFocusPainted(false);
         add(complaintButton);
+
         JButton viewButton = new JButton("View My Complaints");
-        viewButton.setBounds(180, 190, 180, 35);
+        viewButton.setBounds(180, 180, 220, 40);
+        viewButton.setFont(new Font("Arial", Font.BOLD, 14));
+        viewButton.setBackground(new Color(52,152,219));
+        viewButton.setForeground(Color.WHITE);
+        viewButton.setFocusPainted(false);
         add(viewButton);
+
 
         complaintButton.addActionListener(new ActionListener() {
             @Override
@@ -43,7 +57,11 @@ public class Dashboard extends JFrame {
         });
 
         JButton logoutButton = new JButton("Logout");
-        logoutButton.setBounds(180, 260, 180, 35);
+        logoutButton.setBounds(180, 240, 220, 40);
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 14));
+        logoutButton.setBackground(new Color(231,76,60));
+        logoutButton.setForeground(Color.WHITE);
+        logoutButton.setFocusPainted(false);
         add(logoutButton);
 
         logoutButton.addActionListener(e -> {
