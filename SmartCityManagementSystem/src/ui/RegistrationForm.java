@@ -102,12 +102,33 @@ public class RegistrationForm extends JFrame {
                     return;
                 }
                 User user = new User();
+                user.setFullName(nameField.getText());
+
+                if (!user.getFullName().matches("[a-zA-Z ]+")) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Name should contain only letters!"
+                    );
+
+                    return;
+                }
 
                 user.setFullName(nameField.getText());
                 user.setEmail(emailField.getText());
                 user.setPassword(String.valueOf(passwordField.getPassword()));
                 user.setPhone(phoneField.getText());
                 user.setRole(roleBox.getSelectedItem().toString());
+
+                if (String.valueOf(passwordField.getPassword()).length() < 6) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Password must be at least 6 characters!"
+                    );
+
+                    return;
+                }
 
                 if (!user.getPhone().matches("[0-9]{10}")) {
 

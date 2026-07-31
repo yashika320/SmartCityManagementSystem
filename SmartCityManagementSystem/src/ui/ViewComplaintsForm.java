@@ -27,7 +27,9 @@ public class ViewComplaintsForm extends JFrame {
         model.addColumn("Title");
         model.addColumn("Location");
         model.addColumn("Status");
-
+        model.addColumn("Priority");
+        model.addColumn("Date");
+        model.addColumn("Time");
         table = new JTable(model);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -45,7 +47,10 @@ public class ViewComplaintsForm extends JFrame {
                     c.getCategory(),
                     c.getTitle(),
                     c.getLocation(),
-                    c.getStatus()
+                    c.getStatus(),
+                    c.getPriority(),
+                    c.getComplaintDate(),
+                    c.getComplaintTime()
             });
         }
 

@@ -9,13 +9,22 @@ public class Complaint {
     private String description;
     private String location;
     private String status;
+    private String imagePath;
+    private String complaintDate;
+    private String complaintTime;
+    private String priority;
 
     public Complaint() {
     }
 
     public Complaint(int id, String userEmail, String category,
                      String title, String description,
-                     String location, String status) {
+                     String location, String status,
+                     String imagePath,
+                     String complaintDate,
+                     String complaintTime,
+                     String priority) {
+
         this.id = id;
         this.userEmail = userEmail;
         this.category = category;
@@ -23,6 +32,10 @@ public class Complaint {
         this.description = description;
         this.location = location;
         this.status = status;
+        this.imagePath = imagePath;
+        this.complaintDate = complaintDate;
+        this.complaintTime = complaintTime;
+        this.priority = priority;
     }
 
     public int getId() {
@@ -79,5 +92,35 @@ public class Complaint {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+    public String getComplaintDate() {
+        return complaintDate;
+    }
+
+    public void setComplaintDate(String complaintDate) {
+        this.complaintDate = complaintDate;
+    }
+
+    public String getComplaintTime() {
+        return complaintTime;
+    }
+
+    public void setComplaintTime(String complaintTime) {
+        this.complaintTime = complaintTime;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 }

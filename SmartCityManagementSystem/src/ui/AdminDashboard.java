@@ -7,23 +7,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AdminDashboard extends JFrame {
+    private JLabel totalCount;
+    private JLabel pendingCount;
+    private JLabel resolvedCount;
 
     public AdminDashboard(User user) {
 
         setTitle("Admin Dashboard");
-        setSize(500,450);
+        setSize(700,700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
 
         JLabel title = new JLabel("ADMIN DASHBOARD");
-        title.setBounds(120,20,300,35);
-        title.setFont(new Font("Arial", Font.BOLD, 22));
+        title.setBounds(180,15,350,40);
+        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        title.setForeground(new Color(44,62,80));
         add(title);
 
         JButton viewComplaints = new JButton("View All Complaints");
-        viewComplaints.setBounds(130,160,220,40);
+        viewComplaints.setBounds(240,170,220,40);
         viewComplaints.setFont(new Font("Arial", Font.BOLD,14));
         viewComplaints.setBackground(new Color(52,152,219));
         viewComplaints.setForeground(Color.WHITE);
@@ -38,7 +42,7 @@ public class AdminDashboard extends JFrame {
         });
 
         JButton updateStatus = new JButton("Update Complaint Status");
-        updateStatus.setBounds(130,210,220,40);
+        updateStatus.setBounds(240,220,220,40);
         updateStatus.setFont(new Font("Arial", Font.BOLD,14));
         updateStatus.setBackground(new Color(241,196,15));
         updateStatus.setForeground(Color.BLACK);
@@ -50,7 +54,7 @@ public class AdminDashboard extends JFrame {
         });
 
         JButton deleteButton = new JButton("Delete Complaint");
-        deleteButton.setBounds(130,260,220,40);
+        deleteButton.setBounds(240,270,220,40);
         deleteButton.setFont(new Font("Arial", Font.BOLD,14));
         deleteButton.setBackground(new Color(231,76,60));
         deleteButton.setForeground(Color.WHITE);
@@ -61,7 +65,7 @@ public class AdminDashboard extends JFrame {
         });
 
         JButton searchButton = new JButton("Search Complaint");
-        searchButton.setBounds(130,310,220,40);
+        searchButton.setBounds(240,320,220,40);
         searchButton.setFont(new Font("Arial", Font.BOLD,14));
         searchButton.setBackground(new Color(155,89,182));
         searchButton.setForeground(Color.WHITE);
@@ -71,8 +75,32 @@ public class AdminDashboard extends JFrame {
             new SearchComplaintForm();
         });
 
+        JButton refreshButton = new JButton("Refresh");
+        refreshButton.setBounds(520,390,100,40);
+        refreshButton.setFont(new Font("Arial", Font.BOLD,14));
+        refreshButton.setBackground(new Color(52,152,219));
+        refreshButton.setForeground(Color.WHITE);
+        refreshButton.setFocusPainted(false);
+        add(refreshButton);
+
+
+        refreshButton.addActionListener(e -> {
+
+            ComplaintDAO dao1 = new ComplaintDAO();
+
+            totalCount.setText(String.valueOf(dao1.getTotalComplaints()));
+            pendingCount.setText(String.valueOf(dao1.getPendingComplaints()));
+            resolvedCount.setText(String.valueOf(dao1.getResolvedComplaints()));
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Dashboard Updated!"
+            );
+
+        });
+
         JButton logout = new JButton("Logout");
-        logout.setBounds(130,360,220,40);
+        logout.setBounds(240,370,220,40);
         logout.setFont(new Font("Arial", Font.BOLD,14));
         logout.setBackground(new Color(127,140,141));
         logout.setForeground(Color.WHITE);
@@ -100,20 +128,87 @@ public class AdminDashboard extends JFrame {
         });
         ComplaintDAO dao = new ComplaintDAO();
 
-        JLabel totalLabel = new JLabel("Total Complaints : " + dao.getTotalComplaints());
-        totalLabel.setBounds(40,70,300,25);
-        totalLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        add(totalLabel);
 
-        JLabel pendingLabel = new JLabel("Pending Complaints : " + dao.getPendingComplaints());
-        pendingLabel.setBounds(40,95,300,25);
-        pendingLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        add(pendingLabel);
 
-        JLabel resolvedLabel = new JLabel("Resolved Complaints : " + dao.getResolvedComplaints());
-        resolvedLabel.setBounds(40,120,300,25);
-        resolvedLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        add(resolvedLabel);
+        JPanel totalPanel = new JPanel();
+        totalPanel.setBounds(30,70,190,80);
+        totalPanel.setBackground(new Color(52,152,219));
+        totalPanel.setLayout(new GridLayout(2,1));
+
+        JLabel totalTitle = new JLabel("Total Complaints",SwingConstants.CENTER);
+        totalTitle.setForeground(Color.WHITE);
+
+         totalCount = new JLabel(String.valueOf(dao.getTotalComplaints()),SwingConstants.CENTER);
+        totalCount.setForeground(Color.WHITE);
+        totalCount.setFont(new Font("Arial",Font.BOLD,24));
+
+        totalPanel.add(totalTitle);
+        totalPanel.add(totalCount);
+        add(totalPanel);
+
+
+        JPanel pendingPanel = new JPanel();
+        pendingPanel.setBounds(250,70,190,80);
+        pendingPanel.setBackground(new Color(241,196,15));
+        pendingPanel.setLayout(new GridLayout(2,1));
+
+        JLabel pendingTitle = new JLabel("Pending",SwingConstants.CENTER);
+        pendingTitle.setForeground(Color.BLACK);
+
+        pendingCount = new JLabel(String.valueOf(dao.getPendingComplaints()),SwingConstants.CENTER);
+        pendingCount.setFont(new Font("Arial",Font.BOLD,24));
+
+        pendingPanel.add(pendingTitle);
+        pendingPanel.add(pendingCount);
+        add(pendingPanel);
+
+
+        JPanel resolvedPanel = new JPanel();
+        resolvedPanel.setBounds(470,70,190,80);
+        resolvedPanel.setBackground(new Color(46,204,113));
+        resolvedPanel.setLayout(new GridLayout(2,1));
+
+        JLabel resolvedTitle = new JLabel("Resolved",SwingConstants.CENTER);
+        resolvedTitle.setForeground(Color.WHITE);
+
+         resolvedCount = new JLabel(String.valueOf(dao.getResolvedComplaints()),SwingConstants.CENTER);
+        resolvedCount.setForeground(Color.WHITE);
+        resolvedCount.setFont(new Font("Arial",Font.BOLD,24));
+
+        resolvedPanel.add(resolvedTitle);
+        resolvedPanel.add(resolvedCount);
+        add(resolvedPanel);
+
+        JLabel categoryTitle = new JLabel("Category Wise Complaints");
+        categoryTitle.setBounds(230,440,300,30);
+        categoryTitle.setFont(new Font("Arial",Font.BOLD,18));
+        add(categoryTitle);
+
+
+        ComplaintDAO categoryDao = new ComplaintDAO();
+
+        String[] categories = {
+                "Road",
+                "Water",
+                "Electricity",
+                "Garbage",
+                "Street Light"
+        };
+
+        int y = 480;
+
+        for(String category : categories){
+
+            JLabel label = new JLabel(
+                    category + " : " + categoryDao.getCategoryCount(category)
+            );
+
+            label.setBounds(250,y,250,25);
+            label.setFont(new Font("Arial",Font.PLAIN,15));
+            add(label);
+
+            y += 25;
+        }
 
         setVisible(true);
     }

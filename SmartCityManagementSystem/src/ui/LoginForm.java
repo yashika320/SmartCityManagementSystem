@@ -67,6 +67,24 @@ public class LoginForm extends JFrame {
                     );
                     return;
                 }
+                if (!emailField.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+
+                    JOptionPane.showMessageDialog(
+                            LoginForm.this,
+                            "Enter a valid email address!"
+                    );
+
+                    return;
+                }
+                if (String.valueOf(passwordField.getPassword()).length() < 6) {
+
+                    JOptionPane.showMessageDialog(
+                            LoginForm.this,
+                            "Password must be at least 6 characters!"
+                    );
+
+                    return;
+                }
                 String email = emailField.getText();
                 String password = String.valueOf(passwordField.getPassword());
 
@@ -110,6 +128,7 @@ public class LoginForm extends JFrame {
             dispose();
             new RegistrationForm();
         });
+
 
         setVisible(true);
     }

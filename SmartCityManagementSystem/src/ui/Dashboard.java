@@ -56,8 +56,21 @@ public class Dashboard extends JFrame {
             }
         });
 
+        JButton profileButton = new JButton("My Profile");
+        profileButton.setBounds(180,240,220,40);
+        profileButton.setFont(new Font("Arial", Font.BOLD,14));
+        profileButton.setBackground(new Color(155,89,182));
+        profileButton.setForeground(Color.WHITE);
+        profileButton.setFocusPainted(false);
+        add(profileButton);
+
+
+        profileButton.addActionListener(e -> {
+            new ProfileForm(user);
+        });
+
         JButton logoutButton = new JButton("Logout");
-        logoutButton.setBounds(180, 240, 220, 40);
+        logoutButton.setBounds(180, 300, 220, 40);
         logoutButton.setFont(new Font("Arial", Font.BOLD, 14));
         logoutButton.setBackground(new Color(231,76,60));
         logoutButton.setForeground(Color.WHITE);
